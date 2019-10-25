@@ -5,12 +5,14 @@ The project of learning kotlin,According to official documents。
 
 [TOC]
 
+## 规范用法（KotlinStandardUse）
+
 ## 协程
 线程安全与单例模式（SingleInstance）
 
 
 ## 集合
-### filter
+### filter（KotlinStandardUse）
 ### map
 
 # 个人实践归纳
@@ -18,6 +20,7 @@ The project of learning kotlin,According to official documents。
 ### 固定个数参数
 ### 不固定参数
 ### 可选参数
+
 
 
 

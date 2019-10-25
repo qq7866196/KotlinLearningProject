@@ -8,6 +8,12 @@ import kotlin.concurrent.thread
  * 传统线程执行
  * 协程执行
  *
+ *
+ *
+ * 结论：
+ * 1.类在不使用的情况下，即使是静态字段，也是不进行初始化的
+ * 2.
+ *
  */
 
 /**
@@ -40,6 +46,8 @@ fun testUse() {
 
 
 class SingleInstance {
+    var out_side = 11
+
     //2.懒汉式
 
     /**
@@ -85,6 +93,8 @@ class SingleInstance {
         val instance: Instance by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
             Instance()
         }
+
+        var param01 = 0
     }
 
     class Instance
@@ -129,38 +139,38 @@ class SingleInstance {
 
 
 fun javaThreadRun() {
-    println("main thread:"+Thread.currentThread().id)
+    println("main thread:" + Thread.currentThread().id)
 
     //继承Thread类
-    object :Thread() {
+    object : Thread() {
         override fun run() {
-            println("in thread:"+Thread.currentThread().id)
+            println("in thread:" + Thread.currentThread().id)
         }
     }.start()
 
     //下面几种类似的写法最终使用都是Runnable类初始化Thread对象
     //lambda表达式
-    Thread{
-        println("lambda in thread:"+Thread.currentThread().id)
+    Thread {
+        println("lambda in thread:" + Thread.currentThread().id)
     }.start()
 
     Thread(Runnable {
-        println("in thread2:"+Thread.currentThread().id)
+        println("in thread2:" + Thread.currentThread().id)
     }).start()
 
-    Thread{
+    Thread {
         run {
-            println("in thread3:"+Thread.currentThread().id)
+            println("in thread3:" + Thread.currentThread().id)
         }
     }.start()
 
     //kotlin 封装的方式一
     thread {
-        println("kotlin in thread:"+Thread.currentThread().id)
+        println("kotlin in thread:" + Thread.currentThread().id)
     }
 
     //多种参数配置
-    thread(true){
+    thread(true) {
 
     }
 
@@ -169,10 +179,13 @@ fun javaThreadRun() {
 
 }
 
-fun  main(){
+fun main() {
     javaThreadRun()
-    //TODO
-    //TODO 如何证明静态内部类在不使用时是没有实例化对象的，同样饿汉式的静态对象在启动后就会被创建？
+    //通过profiler内存dump可以看出，SingleInstance01调用后(如在MainActivity的onCreate方法中调用)，就会保留对象，其他代码并未执行
+    //同一个类里，初始化一个静态字段时，其他静态字段也会完成初始化
+    //同一个类里，创建类对象，并赋值全局字段。静态字段会被初始化，从kotlin转换的代码可以看出
+    //同一个类里，非内部类，只要不调用，不管其内部是否有静态字段，都不会初始化
+    //静态内部类在不使用时是没有实例化对象的,
 
 
 }

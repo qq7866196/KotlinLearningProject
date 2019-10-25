@@ -55,7 +55,8 @@ class MainActivity : AppCompatActivity(), BlankFragment.OnFragmentInteractionLis
             item?.text = mTitles[i]
         }
 
-
+        val cl = SingleInstance()
+        cl.out_side = 24
 
     }
 
