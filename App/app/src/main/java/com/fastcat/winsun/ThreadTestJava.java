@@ -15,8 +15,6 @@ public class ThreadTestJava {
 
     /**
      * run 可以多次执行，start不能。
-     *
-     * @param agrs
      */
     public static void main(String[] agrs) {
 

@@ -5,11 +5,12 @@ import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.google.gson.JsonPrimitive
 import java.io.File
+import java.util.concurrent.locks.Lock
 
 /**
  * 官方定义的习惯用法
  */
-class KotlinStandardUse {
+class KotlinIdiomaticUse {
 
     //过滤 list
     fun listFilter() {
@@ -110,6 +111,9 @@ class KotlinStandardUse {
     }
 
     //“if”表达式
+    /**
+     *  返回[param]
+     */
     fun foo(param: Int) {
         val result = if (param == 1) {
             "one"
@@ -143,8 +147,10 @@ class KotlinStandardUse {
 //     public <T> T fromJson(JsonElement json, Class<T> classOfT) throws JsonSyntaxException {
 //     ……
 
-    //inline,新开方法是有消耗的（参考方法栈的概念），而内联函数相当于直接将字节码注入目标方法中，省去新开方法的成本
-    //reified 具体化，我的理解是将范型定义具体化，算inline的规定用法。
+    /**
+     * inline,方法调用是有消耗的（参考方法栈的概念），而内联函数相当于直接将字节码注入目标方法中，这样就少调用一个方法
+     * reified 具体化，我的理解是将范型定义具体化，算inline的一种规定用法。
+     */
     inline fun <reified T : Any> Gson.fromJson(json: JsonElement): T = this.fromJson(json, T::class.java)
 
     inline fun <reified D : Any> getAbc(): D? {
@@ -157,6 +163,21 @@ class KotlinStandardUse {
         gson.fromJson<String>(JsonPrimitive("123"))
     }
 
+    //拓展，noinline，
+    inline fun <T> check(lock: Lock, body: () -> T): T {
+        lock.lock()
+        try {
+            //otherCheck(body)//会报错，调用的时候，由于inline特性，body不能再做参数传递，
+            //在body前面加noinline就可以
+            return body()
+        } finally {
+            lock.unlock()
+        }
+    }
+
+    fun <T> otherCheck(body: () -> T) {
+
+    }
 
     //返回类型为 Unit 的方法的 Builder 风格用法
     //TODO 更多用法有待挖掘
