@@ -2,6 +2,9 @@
 
 # KotlinLearningProject
 学习kotlin官方文档项目
+刚开始会有点凌乱，随着学习进度，会慢慢进行结构调整，归纳整理的'
+
+临时增加一些关于junit的使用，会区分java和android
 
 [TOC]
 
@@ -53,11 +56,18 @@ typealias PersonIndex = Map<String, Person>
 
 
 ### 使用中缀函数
+官方：
 一个函数只有用于两个角色类似的对象时才将其声明为中缀函数。良好示例如：and、 to、zip。 不良示例如：add。
-
 如果一个方法会改动其接收者，那么不要声明为中缀形式。
 
-参考：https://www.jianshu.com/p/18dfa6f0b278
+解读：
+中缀函数：如果一个函数只有一个参数，且用 infix 修饰，那么这个函数就是中缀函数
+
+中缀函数的使用条件
+* 必须是成员函数或者扩展函数；
+* 必须只有一个参数；
+* 参数不能是可变参数或默认参数
+
 
 ### 工厂函数
 如果为一个类声明一个工厂函数，那么不要让它与类自身同名。优先使用独特的名称， 该名称能表明为何该工厂函数的行为与众不同。只有当确实没有特殊的语义时， 才可以使用与该类相同的名称。
@@ -77,6 +87,7 @@ class Point(val x: Double, val y: Double) {
 
 ### 平台类型(???)
 
+官方：
 返回平台类型表达式的公有函数/方法必须显式声明其 Kotlin 类型：
 
 fun apiCall(): String = MyJavaApi.getProperty("name")
@@ -91,6 +102,8 @@ fun main() {
     val name = MyJavaApi.getProperty("name")
     println(name)
 }
+
+解读：
 
 
 
