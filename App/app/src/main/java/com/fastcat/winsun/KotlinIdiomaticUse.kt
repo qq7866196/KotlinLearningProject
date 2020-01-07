@@ -7,6 +7,10 @@ import com.google.gson.JsonPrimitive
 import java.io.File
 import java.util.concurrent.locks.Lock
 
+fun main(args: Array<String>) {
+    println("Hello JavaScript!")
+}
+
 /**
  * 官方定义的习惯用法
  */
@@ -151,7 +155,8 @@ class KotlinIdiomaticUse {
      * inline,方法调用是有消耗的（参考方法栈的概念），而内联函数相当于直接将字节码注入目标方法中，这样就少调用一个方法
      * reified 具体化，我的理解是将范型定义具体化，算inline的一种规定用法。
      */
-    inline fun <reified T : Any> Gson.fromJson(json: JsonElement): T = this.fromJson(json, T::class.java)
+    inline fun <reified T : Any> Gson.fromJson(json: JsonElement): T =
+        this.fromJson(json, T::class.java)
 
     inline fun <reified D : Any> getAbc(): D? {
         return null

@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_main.*
  * 4.添加图标，自定义视图
  */
 class MainActivity : AppCompatActivity(), BlankFragment.OnFragmentInteractionListener {
-    val mTitles:Array<String> = arrayOf("上海", "头条推荐", "生活", "娱乐八卦", "体育",
+    val titles:Array<String> = arrayOf("上海", "头条推荐", "生活", "娱乐八卦", "体育",
         "段子", "美食", "电影", "科技", "搞笑",
         "社会", "财经", "时尚", "汽车", "军事",
         "小说", "育儿", "职场", "萌宠", "游戏",
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity(), BlankFragment.OnFragmentInteractionLis
         for(i in 0..tab_layout.tabCount) {
             val item = tab_layout.getTabAt(i)
             item?.tag = i
-            item?.text = mTitles[i]
+            item?.text = titles[i]
         }
 
         val cl = SingleInstance()
@@ -73,11 +73,4 @@ class MainActivity : AppCompatActivity(), BlankFragment.OnFragmentInteractionLis
     }
 
 
-    fun  asy() {
-        Thread( Runnable {
-
-        }).start()
-
-
-    }
 }

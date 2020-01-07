@@ -2,6 +2,7 @@
 
 # KotlinLearningProject
 学习kotlin官方文档项目
+本文是基于对java基础。
 刚开始会有点凌乱，随着学习进度，会慢慢进行结构调整，归纳整理的'
 
 临时增加一些关于junit的使用，会区分java和android
@@ -109,6 +110,8 @@ fun main() {
 
 ## 协程
 线程安全与单例模式（SingleInstance）
+协程基础使用测试（XCTest01+等）
+
 
 
 ## 集合

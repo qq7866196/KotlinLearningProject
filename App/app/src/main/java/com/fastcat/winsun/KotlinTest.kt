@@ -49,6 +49,37 @@ fun foo2() {
 }
 
 fun main() {
-    foo()
+    //foo()
     //foo3()
+
+    val solution = Solution();
+    val b = solution.isIsomorphic("paperr","titler")
+    print(b.toString())
+}
+
+class Solution {
+
+    fun isIsomorphic(s: String, t: String): Boolean {
+        val chatS = s.toCharArray()
+        val chatT = t.toCharArray()
+        for (index in chatS.indices) {
+            if (s.indexOf(chatS[index]) != t.indexOf(chatT[index])) {
+                return false
+            }
+        }
+        return true
+    }
+
+ /*   public boolean isIsomorphic(String s, String t) {
+        char[] ch1 = s.toCharArray();
+        char[] ch2 = t.toCharArray();
+        int len = s.length();
+        for (int i = 0; i < len; i++) {
+            if(s.indexOf(ch1[i]) != t.indexOf(ch2[i])){
+                return false;
+            }
+        }
+        return true;
+    }*/
+
 }
